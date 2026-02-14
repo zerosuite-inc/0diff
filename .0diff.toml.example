@@ -1,0 +1,46 @@
+# 0diff Configuration
+# Place this file as .0diff.toml in your project root.
+
+[watch]
+# Directories to watch for changes (relative to project root)
+paths = ["src/", "app/", "entities/"]
+
+# Patterns to ignore (supports glob syntax)
+ignore = ["target/", "node_modules/", ".git/", "*.log", ".flindb/"]
+
+# File extensions to track (without the dot)
+extensions = ["rs", "flin", "ts", "js", "py", "go", "java"]
+
+# Debounce interval in milliseconds — changes within this window are batched
+debounce_ms = 500
+
+[filter]
+# Ignore whitespace-only changes in diffs
+ignore_whitespace = true
+
+# Minimum number of lines changed to record a modification
+min_lines_changed = 1
+
+[git]
+# Enable git integration (branch, author, commit tracking)
+enabled = true
+
+# Track the author of each change via git blame
+track_author = true
+
+# Track the current branch name
+track_branch = true
+
+[history]
+# Maximum history storage size in megabytes
+max_size_mb = 10
+
+# Maximum age of history entries in days
+max_days = 30
+
+[agents]
+# Patterns to detect AI agent modifications (matched against commit messages and metadata)
+detect_patterns = ["Claude", "Cursor", "Copilot", "Windsurf", "Devin"]
+
+# Automatically tag changes identified as non-human
+tag_non_human = true
