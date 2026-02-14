@@ -5,7 +5,7 @@ edition = "2021"
 authors = ["Juste A. Gnimavo <juste@zerosuite.dev>", "Claude <noreply@anthropic.com>"]
 description = "Real-time code modification tracking for the multi-agent era"
 license = "MIT"
-repository = "https://github.com/zerosuite/0diff"
+repository = "https://github.com/zerosuite-inc/0diff"
 keywords = ["diff", "git", "agent", "tracking", "code-review"]
 categories = ["command-line-utilities", "development-tools"]
 
