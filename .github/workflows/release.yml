@@ -3,9 +3,17 @@ name: Release
 on:
   release:
     types: [created]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (e.g. v0.1.0)"
+        required: true
 
 permissions:
   contents: write
+
+env:
+  RELEASE_TAG: ${{ github.event.release.tag_name || github.event.inputs.tag }}
 
 jobs:
   build:
@@ -47,12 +55,12 @@ jobs:
       - name: Package
         run: |
           cp target/${{ matrix.target }}/release/0diff 0diff
-          tar czf 0diff-${{ github.event.release.tag_name }}-${{ matrix.platform }}.tar.gz 0diff
+          tar czf 0diff-${{ env.RELEASE_TAG }}-${{ matrix.platform }}.tar.gz 0diff
 
       - name: Upload to release
         run: |
-          gh release upload ${{ github.event.release.tag_name }} \
-            0diff-${{ github.event.release.tag_name }}-${{ matrix.platform }}.tar.gz \
+          gh release upload ${{ env.RELEASE_TAG }} \
+            0diff-${{ env.RELEASE_TAG }}-${{ matrix.platform }}.tar.gz \
             --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
