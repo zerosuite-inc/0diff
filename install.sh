@@ -69,20 +69,20 @@ try_binary_install() {
 
     info "Downloading 0diff ${VERSION} for ${PLATFORM}..."
 
-    TMPDIR=$(mktemp -d)
-    trap 'rm -rf "$TMPDIR"' EXIT
+    TMPD=$(mktemp -d)
+    trap 'rm -rf "$TMPD"' EXIT
 
-    if ! curl -fsSL "$URL" -o "${TMPDIR}/${ARCHIVE}" 2>/dev/null; then
+    if ! curl -fsSL "$URL" -o "${TMPD}/${ARCHIVE}" 2>/dev/null; then
         return 1
     fi
 
-    tar -xzf "${TMPDIR}/${ARCHIVE}" -C "$TMPDIR"
+    tar -xzf "${TMPD}/${ARCHIVE}" -C "$TMPD"
 
     if [ -w "$INSTALL_DIR" ]; then
-        mv "${TMPDIR}/${BINARY}" "${INSTALL_DIR}/${BINARY}"
+        mv "${TMPD}/${BINARY}" "${INSTALL_DIR}/${BINARY}"
     else
         info "Installing to ${INSTALL_DIR} (requires sudo)..."
-        sudo mv "${TMPDIR}/${BINARY}" "${INSTALL_DIR}/${BINARY}"
+        sudo mv "${TMPD}/${BINARY}" "${INSTALL_DIR}/${BINARY}"
     fi
 
     chmod +x "${INSTALL_DIR}/${BINARY}"

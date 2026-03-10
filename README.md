@@ -17,9 +17,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/zerosuite-inc/0diff/releases"><img alt="Release" src="https://img.shields.io/github/v/release/zerosuite-inc/0diff?include_prereleases&style=flat-square&color=00ff87&label=version"></a>
+  <a href="https://github.com/zerosuite-inc/0diff/releases"><img alt="Release" src="https://img.shields.io/github/v/release/zerosuite-inc/0diff?style=flat-square&color=00ff87&label=version"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square"></a>
   <a href="https://github.com/zerosuite-inc/0diff"><img alt="Built with Rust" src="https://img.shields.io/badge/built%20with-Rust-orange?style=flat-square"></a>
+  <a href="https://github.com/zerosuite-inc/0diff/actions/workflows/release.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/zerosuite-inc/0diff/release.yml?style=flat-square&label=build"></a>
 </p>
 
 ---
@@ -84,35 +85,46 @@ $ 0diff watch
 
 ## Install
 
+### One-liner (recommended)
+
 ```bash
 curl -fsSL https://0diff.dev/install.sh | sh
 ```
 
-The installer auto-detects your OS and architecture. If no pre-built binary is available, it falls back to building from source via `cargo install`.
+Auto-detects OS and architecture. Downloads a pre-built binary (~2MB) or falls back to building from source.
 
-## Build from Source
+### Homebrew (macOS / Linux)
+
+```bash
+brew install zerosuite-inc/tap/zerodiff
+```
+
+### Cargo
+
+```bash
+cargo install --git https://github.com/zerosuite-inc/0diff.git
+```
+
+### Pre-built binaries
+
+Download directly from [GitHub Releases](https://github.com/zerosuite-inc/0diff/releases):
+
+| Platform | Binary |
+|---|---|
+| macOS Apple Silicon | `0diff-v*-darwin-aarch64.tar.gz` |
+| macOS Intel | `0diff-v*-darwin-x86_64.tar.gz` |
+| Linux x86_64 | `0diff-v*-linux-x86_64.tar.gz` |
+| Linux ARM64 | `0diff-v*-linux-aarch64.tar.gz` |
+
+### Build from source
 
 Requires [Rust](https://rustup.rs) (1.70+).
 
 ```bash
-# Clone and build
 git clone https://github.com/zerosuite-inc/0diff.git
 cd 0diff
-cargo build --release
-
-# Binary is at ./target/release/0diff (~2MB)
-
-# Or install directly to PATH
-cargo install --path .
-
-# Run tests (44 tests, 0 failures)
-cargo test
-```
-
-Or install directly from GitHub without cloning:
-
-```bash
-cargo install --git https://github.com/zerosuite-inc/0diff.git
+cargo build --release    # Binary at ./target/release/0diff (~2MB)
+cargo test               # 44 tests, 0 failures
 ```
 
 ## Quick Start
@@ -258,11 +270,11 @@ Issues and PRs welcome.
 
 - **v0.2** — Background daemon mode, Slack/Discord/webhook notifications, daily digest
 - **v0.3** — Comment filtering, critical file alerts, multi-agent collision detection
-- **v1.0** — VS Code extension, GitHub Actions integration, cross-platform release builds
+- **v1.0** — VS Code extension, GitHub Actions integration, Homebrew core submission
 
 ## Part of the ZeroSuite Ecosystem
 
-Built by [ZeroSuite, Inc.](https://zerosuite.dev) — Cotonou, Benin
+Built by [ZeroSuite, Inc.](https://zerosuite.dev) — Delaware, USA | West Africa
 
 [0diff.dev](https://0diff.dev) · [flin.sh](https://flin.sh) · [zerosuite.dev](https://zerosuite.dev)
 
