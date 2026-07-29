@@ -29,7 +29,7 @@
 
 You're running Claude Code, Cursor, Copilot, Windsurf, or Devin alongside your team. They write code in your files, under your name, without asking. A function gets refactored silently. An indentation change hides a logic bug. A config file is modified in a 200-file PR and nobody notices.
 
-**67% of production incidents trace back to a code change that bypassed proper review.** Teams spend an average of 4.2 hours identifying the root cause of change-related regressions. Traditional tools like `git diff` and `git blame` weren't built for a world where AI agents are co-authoring your codebase.
+The change lands silently, under your git identity. `git blame` credits the last human who touched the line, not the agent that rewrote it. You find out at review time — or in production, long after the change shipped. `git diff` and `git blame` were built for a world where every change had a human author.
 
 **0diff fixes this.** It watches your files in real-time, computes intelligent diffs, identifies who made each change (human or AI), and logs everything to a searchable history. One binary. Zero config. Total visibility.
 
@@ -67,13 +67,13 @@ $ 0diff watch
 
 ## Features
 
-**Real-Time File Watching** — Native OS-level monitoring using inotify (Linux) and FSEvents (macOS). Debounced to avoid noise. Instant detection, zero CPU overhead.
+**Real-Time File Watching** — Native OS-level monitoring using inotify (Linux) and FSEvents (macOS). Debounced to avoid noise. Event-driven, so it does not poll your filesystem.
 
 **Smart Diff Engine** — Myers algorithm computes precise, line-level diffs. Optionally ignore whitespace-only changes or changes below a configurable threshold. See what actually matters.
 
 **Git Attribution** — Automatically detects the current branch, runs git blame on modified lines, and identifies the author. Know exactly who changed each line, even before the commit.
 
-**AI Agent Detection** — The killer feature. Scans `Co-Authored-By` headers, commit messages, environment variables, and TTY sessions to identify changes made by Claude, Cursor, Copilot, Windsurf, and Devin. Non-human changes are flagged with a `[AI AGENT]` badge.
+**AI Agent Detection** — Scans `Co-Authored-By` headers, commit messages, environment variables, and TTY sessions to identify changes made by Claude, Cursor, Copilot, Windsurf, and Devin. Non-human changes are flagged with a `[AI AGENT]` badge. Detection relies on those signals: when an agent leaves none of them, the change is attributed like any other.
 
 **Searchable History** — Every change is logged to a local JSON-lines file. Query by author, file, date, branch, or agent. Full audit trail without git log archaeology.
 
